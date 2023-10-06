@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Juego Memoria</title>
+    <link href="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/css/bootstrap.min.css" rel="stylesheet">
+    <link rel="stylesheet" href="styles.css">
+</head>
+<body>
+    <div class="container">
+        <div class="row">
+            <h1 class="text-center my-3">Juego Memoria</h1>
+        </div>
+        <div class="row">
+            <ul class="nav justify-content-center">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="#">Jugador: <span
+                            class="jugador">Pepito</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Aciertos <span class="aciertos">0</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link" href="#">Intentos: <span class="intentos">0</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Tiempo: <span class="tiempo">0</span></a>
+                </li>
+                <li class="nav-item">
+                    <a class="nav-link">Nivel: <span class="nivel">0</span></a>
+                </li>
+                <li class="nav-item">
+                    <button class="btn btn-danger btn-iniciar" type="button">Empezar</button>
+                </li>
+            </ul>
+        </div>
+        <div class="row">
+        </div>
+        <div class="row">
+            <div class="col-12">
+                <div class="row">
+                    <div class="col-8">
+                        <!-- tablero imagenes -->
+                        <div class="row tablero">
+                            <h1>Tablero De Juego</h1>
+                            <hr>
+                            <!-- <div class="col-3"><img src="imgs/gtr3.jpg" class="img-fluid alto-img"></div>
+                            <div class="col-3"><img src="imgs/gtr5.jpg" class="img-fluid alto-img"></div>
+                            <div class="col-3"><img src="imgs/gtr6.jpg" class="img-fluid alto-img"></div>
+                            <div class="col-3"><img src="imgs/gtr2.jpg" class="img-fluid alto-img"></div> -->
+                        </div>
+                    </div>
+                    <div class="col-4">
+                        <!-- tabla de records -->
+                        <table class="table tabla-records my-3">
+                            <thead>
+                                <th>#</th>
+                                <th>Jugador</th>
+                                <th>Intentos Totales</th>
+                                <th>Tiempo Total</th>
+                            </thead>
+                            <tbody>
+                                                              <!-- Aquí van los registros de cada jugador -->
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <!-- ventana para nombre jugador -->
+
+
+    <!-- Modal -->
+    <div class="modalNombre modal fade show .show" style="display: block;" id="exampleModal" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">Escribe tu nombre</h1>
+                    <button type="button" class="btn-close cerrar" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <form>
+                        <div class="mb-3">
+                          <label for="exampleInputEmail1" class="form-label">Nombre</label>
+                          <input type="text" class="nombreJ form-control" id="exampleInputEmail1" aria-describedby="emailHelp">
+                          
+                        </div>
+                  
+                        
+                        
+                    </form>
+                </div>
+                <div class="modal-footer d-flex justify-content-between">
+                    <button type="button" class="btn btn-secondary cerrar" data-bs-dismiss="modal">Cerrar</button>
+                    <button type="button" class="btn-registrar btn btn-primary">Guardar datos</button>
+                </div>
+            </div>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.2/dist/js/bootstrap.bundle.min.js" integrity="sha384-C6RzsynM9kWDrMNeT87bh95OGNyZPhcTNXj1NW7RuBCsyN/o0jlpcV8Qyq46cDfL" crossorigin="anonymous"></script>
+    <script src="index.js"></script>
+    <script src="datos.js"></script>
+</body>
+</html>
