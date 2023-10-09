@@ -1,28 +1,38 @@
-document.addEventListener("DOMContentLoaded", function(){
-    //tomarDatos();
-    mostrarDatos();
-    mostrarVentanaJugador();
-})
-
 // variables gloables
 const d = document;
 // grupo imgs1
 let imagenes = [
-    { nombre: "bagDarrel", url: "imgs/gtr3.png" },
+
     { nombre: "ibanezGio", url: "imgs/gtr1.jpg" },
     { nombre: "lesPaul", url: "imgs/gtr2.jpg" },
-    { nombre: "stratNegra", url: "imgs/gtr4.jpg" },
-    { nombre: "stratGris", url: "imgs/gtr6.jpg" },
-    { nombre: "stratRoja", url: "imgs/gtr5.png" },
-    { nombre: "stratGris", url: "imgs/gtr6.jpg" },
     { nombre: "bagDarrel", url: "imgs/gtr3.png" },
-    { nombre: "lesPaul", url: "imgs/gtr2.jpg" },
     { nombre: "stratNegra", url: "imgs/gtr4.jpg" },
-    { nombre: "stratRoja", url: "imgs/gtr5.png" },
-    { nombre: "ibanezGio", url: "imgs/gtr1.jpg" }
+
+
+    { nombre: "ibanezGio", url: "imgs/gtr1.jpg" },
+    { nombre: "lesPaul", url: "imgs/gtr2.jpg" },
+    { nombre: "bagDarrel", url: "imgs/gtr3.png" },
+    { nombre: "stratNegra", url: "imgs/gtr4.jpg" },
+
 ];
 // grupo imgs2
 let imagenes2 =[
+    { nombre: "ac_guitar", url: "imgs/gtr7.png" },
+    { nombre: "hollow_gtr", url: "imgs/gtr8.png" },
+    { nombre: "pink_strato", url: "imgs/gtr9.png" },
+    { nombre: "white_strato", url: "imgs/gtr10.png" },
+    { nombre: "gold_lespaul", url: "imgs/gtr11.png" },
+    { nombre: "flying_v", url: "imgs/gtr12.png" },
+
+    { nombre: "ac_guitar", url: "imgs/gtr7.png" },
+    { nombre: "hollow_gtr", url: "imgs/gtr8.png" },
+    { nombre: "pink_strato", url: "imgs/gtr9.png" },
+    { nombre: "white_strato", url: "imgs/gtr10.png" },
+    { nombre: "gold_lespaul", url: "imgs/gtr11.png" },
+    { nombre: "flying_v", url: "imgs/gtr12.png" }
+]
+// grupo imgs3
+let imagenes3 =[
     { nombre: "ac_guitar", url: "imgs/gtr7.png" },
     { nombre: "hollow_gtr", url: "imgs/gtr8.png" },
     { nombre: "pink_strato", url: "imgs/gtr9.png" },
@@ -36,15 +46,23 @@ let imagenes2 =[
     { nombre: "gold_lespaul", url: "imgs/gtr11.png" },
     { nombre: "flying_v", url: "imgs/gtr12.png" }
 ]
-
+d.addEventListener("DOMContentLoaded",function(){
+    mostrarVentanaJugador()
+    mostrarDatos()
+})
 let tablero = d.querySelector(".tablero")
+let tableroRecords = d.querySelector(".tableroRecords")
+let titulopagina = d.querySelector(".tituloPagina");
+let btnIniciar = d.querySelector(".btnIniciar");
+let imgNivel;
 let posImg = [];
 let nombreImg = [];
 let aciertos = 0;
 let intentos = 0;
-let tiempo = 30;
+let tiempo = 60; //
 let nivel = 1;
 let mostrarNivel = d.querySelector(".nivel")
+let tableroNivel = d.querySelector(".tableroNivel")
 let mostrarIntentos = d.querySelector(".intentos");
 let mostrarAciertos = d.querySelector(".aciertos");
 let mostrarTiempo = d.querySelector(".tiempo");
@@ -57,28 +75,36 @@ let sonidoSeleccionar = new Audio("sounds/escoger.mp3");
 let sonidoNivel = new Audio("sounds/level_up.mp3");
 let sonidoFondo = new Audio("sounds/music.mp3");
 
-
-
 // agregr evento al boton para iniciar el juego
 botonInciar.addEventListener("click", function (){
-    sonidoFondo.play();
-    mostrarNivel.textContent = nivel;
-    // ejecutar funcion
+
     if (estoyJugando == false && nivel == 1) {
+        mostrarNivel.textContent = nivel;
+        tableroNivel.textContent = "Nivel 1: Guitarras Electricas"
         estoyJugando = true;
+        tableroRecords.style.display="none"
+        titulopagina.style.display="block"
+        btnIniciar.style.display="none"
         agregarImg();
         timepoDeJuego();
-        imagenes.sort(()=>Math.random() -0.5 );
+        imgNivel.sort(()=>Math.random() -0.5 );
+        sonidoFondo.play();
+
     } else if (estoyJugando == false && nivel == 2) {
+
+        btnIniciar.style.display="none"
         estoyJugando = true;
         agregarImg();
         timepoDeJuego();
-        imagenes.sort(()=>Math.random() -0.5 );
+        imgNivel.sort(()=>Math.random() -0.5 );
+
+
     } else if (estoyJugando == false && nivel == 3) {
+        btnIniciar.style.display="none"
         estoyJugando = true;
         agregarImg();
         timepoDeJuego();
-        imagenes.sort(()=>Math.random() -0.5 );
+        imgNivel.sort(()=>Math.random() -0.5 );
     }
 });
 
@@ -96,47 +122,38 @@ function timepoDeJuego() {
         }
         console.log("seg: " + tiempo)
     }, 1000);
-    sonidoFallar.play();
+    // sonidoFallar.play();
 }
 
 // funcion agregar imagenes al tablero de juego
 function agregarImg() {
-    if(nivel == 1){
-        for (let i = 0; i < imagenes.length; i++) {
-            let div = d.createElement("div");
-            let img = d.createElement("img");
-            div.setAttribute("class", "col-3");
-            img.setAttribute("class", "img-fluid alto-img");
-            img.setAttribute("src", "imgs/censored.png");
-            img.setAttribute("id", i);
-            img.addEventListener("click", mostrarImg);
-            div.appendChild(img);
-            tablero.appendChild(div);
-        }
-    }else if(nivel == 2){
-        for (let i = 0; i < imagenes2.length; i++) {
-            let div = d.createElement("div");
-            let img = d.createElement("img");
-            div.setAttribute("class", "col-3");
-            img.setAttribute("class", "img-fluid alto-img");
-            img.setAttribute("src", "imgs/censored.png");
-            img.setAttribute("id", i);
-            img.addEventListener("click", mostrarImg);
-            div.appendChild(img);
-            tablero.appendChild(div);
-        }
-
+    if(nivel==1){
+        imgNivel=imagenes
+    }else if(nivel==2){
+        imgNivel=imagenes2
+    }else if(nivel==3){
+        imgNivel=imagenes3
     }
-
-}
+        for (let i = 0; i < imgNivel.length; i++) {
+            let div = d.createElement("div");
+            let img = d.createElement("img");
+            div.setAttribute("class", "col-3");
+            img.setAttribute("class", "img-fluid alto-img");
+            img.setAttribute("src", "imgs/censored.png");
+            img.setAttribute("id", i);
+            img.addEventListener("click", mostrarImg);
+            div.appendChild(img);
+            tablero.appendChild(div);
+        }
+    }
 
 // mostrar imagens
 function mostrarImg() {
     let imgID = this.getAttribute("id");
-    // alert("posicion imagen: "+imgID);
-    this.setAttribute("src", imagenes[imgID].url);
+    this.setAttribute("src", imgNivel[imgID].url);
+    this.classList.add("hovered"); 
     posImg.push(imgID);
-    nombreImg.push(imagenes[imgID].nombre);
+    nombreImg.push(imgNivel[imgID].nombre);
     // comparar imagenes
     if (nombreImg.length == 2) {
         setTimeout(compararImg, 300);
@@ -145,6 +162,7 @@ function mostrarImg() {
 // comparar imagenes
 function compararImg() {
     let todasImg = d.querySelectorAll(".tablero div img")
+    todasImg.forEach(img => img.classList.remove("hovered"));
     if (nombreImg[0] == nombreImg[1]) {
         if (posImg[0] != posImg[1]) {
             // alert("Las imagenes Coinciden")
@@ -164,60 +182,78 @@ function compararImg() {
 
         }
     } else {
-        alert("Las imagenes no coinciden")
         todasImg[posImg[0]].setAttribute("src", "imgs/censored.png")
         todasImg[posImg[1]].setAttribute("src", "imgs/censored.png")
         intentos++;
         mostrarIntentos.textContent = intentos;
         sonidoFallar.play();
-
     }
+    
     nombreImg = [];
     posImg = [];
-    // si gana el jugador
-    if (aciertos == 6 && nivel == 1) {
-        alert("Ganaste, Pasas al nivel 1");
-        // location.reload();
-        nivel = 1;
+//PASAR DE NIVEL
+
+//NIVEL2
+    if (aciertos == 4 && nivel == 1) {
+        alert("Ganaste, Pasas al nivel 2");
+
+        nivel++;
         mostrarNivel.textContent = nivel;
+        tableroNivel.textContent = "Nivel 2: Guitarras Acusticas"
         aciertos = 0;
         mostrarAciertos.textContent = aciertos;
         intentos = 0;
         mostrarIntentos.textContent = intentos;
-        tiempo = 20;
+        tiempo = 45;
         mostrarTiempo.textContent = tiempo;
         clearInterval(tiempoTranscurrido)
+        btnIniciar.style.display="block"
         quitarImagenes();
-        agregarImg();
+  
         sonidoNivel.play();
         estoyJugando = false;
+
+
+//NIVEL3
     } else if (aciertos == 6 && nivel == 2) {
-        alert("Ganaste, Pasas de nivel");
+
+
+        alert("Ganaste, Pasas de nivel 3");
         // location.reload();
-        nivel = 2;
+        nivel++;
         mostrarNivel.textContent = nivel;
+        tableroNivel.textContent = "Nivel 3: TODO"
         aciertos = 0;
         mostrarAciertos.textContent = aciertos;
         intentos = 0;
         mostrarIntentos.textContent = intentos;
-        tiempo = 15;
+        tiempo = 30;
         mostrarTiempo.textContent = tiempo;
+        btnIniciar.style.display="block"
         clearInterval(tiempoTranscurrido)
         quitarImagenes();
-        agregarImg();
         sonidoNivel.play();
         estoyJugando = false;
+
+
+        
     }else if (aciertos == 6 && nivel == 3) {
-        alert("Ganaste");
-        sonidoNivel.play();
-       location.reload
+        alert("¡Ganaste! Completaste el juego");
+        tomarDatos();
+        location.reload();
+    }
+
+    if (nombreImg[0] != nombreImg[1]) {
+        todasImg[posImg[0]].classList.add("hovered");
+        todasImg[posImg[1]].classList.add("hovered");
     }
 }
-function quitarImagenes() {
-    let todasLasImg = d.querySelectorAll(".tablero div");
-    todasLasImg.forEach((img) => {
-        img.remove();
+function quitarImagenes(){
+    let todaslasImg=d.querySelectorAll(".tablero div");
+    todaslasImg.forEach((img)=>{
+        img.remove()        
     })
+    
 }
 
 
@@ -241,6 +277,10 @@ function namePlayer(){
   btn_registrar.addEventListener("click", function(){
     let jugadorN = document.querySelector(".nombreJ");
     mostrarJugador.textContent = jugadorN.value;
+    let mostrarModal = document.querySelector(".modalNombre");
     mostrarModal.classList.remove(".show");
+    mostrarModal.style.display = "none";
 })
 }
+
+

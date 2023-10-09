@@ -1,3 +1,16 @@
 .alto-img{
     height: 70%;
 }
+.tablero img {
+    transition: transform 0.3s ease;
+}
+
+.tablero img.hovered {
+    transform: scale(1.1);
+}
+.btn-iniciar{
+    width: 350px; 
+    height: 100px; 
+    font-size: 40px; 
+    font-weight: bolder;
+}
